@@ -1,0 +1,30 @@
+This repository contains files and scripts to create installation environment
+based on booting ubuntu live server image off the network.
+
+Required files:
+ - ISO image, e.g. ubuntu-20.04.4-live-server-amd64.iso
+
+ - kernel and initrd to allow booting into the server installer environment
+
+ - some iPXE config files and the iPXE.iso image (for EFI ~2MB)
+These files are best extracted from the iso, e.g.
+```bash
+isoinfo -f -R -i  ./ubuntu-20.04.4-live-server-amd64.iso | less
+mkdir casper; 
+ISO=./ubuntu-20.04.4-live-server-amd64.iso
+for file in /casper/hwe-initrd /casper/hwe-vmlinuz /casper/initrd /casper/vmlinuz 
+do
+isoinfo -R -i $ISO -x $file > .$file
+done
+```
+ - webserver offering a folder with the files above
+Example simple python www:
+```bash
+sudo python3 -m http.server 
+```
+
+With listening on the primary network interface and TCP/80:
+
+```bash
+sudo python3 -m http.server 80 --bind $(ip -4 -o addr show up primary scope global |grep -o 'inet6\?\ [0-9a-f\.:]\+' | cut -f 2 -d ' ')
+```
