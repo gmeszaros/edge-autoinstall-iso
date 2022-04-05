@@ -21,7 +21,7 @@ autoinstall:
       - default
       uri: http://ports.ubuntu.com/ubuntu-ports
   identity:
-    hostname: node07-auto
+    hostname: node05-auto
     password: $6$k4YJu2KKlGSRKNlu$J/TUNE.f.Dv7G3a2SyBnTOdzPrmcLHYa3pOBepAtFyHBPHKjFPYx2jMYpEA.ilMnrhvCayyof7zvBTlwyM8PA1
     realname: Your name
     username: username
@@ -37,7 +37,7 @@ autoinstall:
     ethernets:
       enp0s25:
         addresses:
-        - 172.27.12.17/23
+        - 172.27.12.15/23
         gateway4: 172.27.13.254
         nameservers: { addresses: [172.27.13.254] }
         dhcp4: false
