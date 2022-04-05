@@ -1,0 +1,11 @@
+For development and prototyping a few Intel NUCs can be used, as the have IntelAMT.
+Their IDER (IDE-Redirect) feature is used to attach the iPXE ISO.
+Best UX is via meshcommander.
+```bash
+wget https://alt.meshcentral.com/meshagents?meshcmd=6 -O meshcmd; chmod a+x meshcmd
+```
+Add the nodes and navigate to Remote Desktop tab. Select IDER and attach the ISO file.
+
+Power on the node and boot over the image in EFI mode.
+
+The installation will begin and reboot to the deployed environment automatically.
