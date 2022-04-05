@@ -1,0 +1,26 @@
+#!ipxe
+
+# This file configures the minimal required networking to chain load node specific information from the HTTP server
+set base-url http://172.27.12.63/
+
+# Network configuration
+# static
+ifopen net0
+set net0/ip 172.27.12.2
+set net0/netmask 255.255.254.0
+set net0/gateway 172.27.13.254
+#set dns 172.27.13.254
+# dhcp
+
+#echo "Configured IP Details:"
+#show net0/ip
+#show net0/netmask
+#show net0/gateway
+#show dns
+#route
+
+echo "sleeping for 2"
+  prompt --key 0x02 --timeout 2000 Press Ctrl-B for the iPXE command line... && shell ||
+
+# Fetch 
+  chain ${base-url}/preseed/2-ubuntu-chainload.ipxe

@@ -1,21 +1,21 @@
 #!ipxe
 
-chain static_vars.ipxe
+# base-url and IP settings inherited from the static config file, can be overwritten if desired
+#set base-url http://172.27.12.63/
+
+set iso ${base-url}/ubuntu-20.04.4-live-server-amd64.iso
+#set iso http://releases.ubuntu.com/20.04/ubuntu-20.04.4-live-server-amd64.iso
+
+set kernel ${base-url}/casper/vmlinuz
+set initrd ${base-url}/casper/initrd
+set preseed ${base-url}/preseed/${net0/mac}/
 
 set menutimeout 5
 # option: have a selection of nodes/purpose configuration
 
-echo Starting Ubuntu x64 installer for 
-#sleep 1
-
 initrd ${initrd}
-kernel ${kernel}
-imgargs vmlinuz initrd=initrd ip=${static_ip}::${gateway}:${netmask}:${hostname}::off url=${iso} cloud-config-url=/dev/null ip6=off apparmor=0 autoinstall ds=nocloud-net;s=${preseed}
-#imgargs vmlinuz only-ubiquity ramdisk_size=1500000 ip=${static_ip}::${gateway}:${netmask}:${hostname}::off url=${iso} cloud-config-url=/dev/null ip6=off apparmor=0 --- vga=normal nomodeset autoinstall ds=nocloud-net;s=${preseed} libata.force=0.00:disable fsck.mode=skip
-
+kernel ${kernel} initrd=initrd ip=${static_ip}::${gateway}:${netmask}:::off url=${iso} cloud-config-url=/dev/null ip6=off autoinstall ds=nocloud-net;s=${preseed}
 boot || 
-
-# If everything failed, give the user some options
 
 echo Boot from url failed
 prompt --key 0x197e --timeout 2000 Press F12 to investigate || shell
