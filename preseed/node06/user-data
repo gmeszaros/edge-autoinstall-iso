@@ -25,6 +25,14 @@ autoinstall:
   snaps:
   - name: maas
     channel: 3.1/stable
+  - name: lxd
+    channel: latest/stable
+  - name: juju
+    channel: latest/stable
+    classic: true
+  - name: microk8s
+    channel: latest/stable
+    classic: true
   network:
     ethernets:
       enp0s25:
